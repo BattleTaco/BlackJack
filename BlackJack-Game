@@ -1,0 +1,71 @@
+import random
+
+def StartingCards(player_deck, opponent_deck):
+	if player_deck and opponent_deck > 0:
+		player_deck = []
+		opponent_deck = []
+	else:
+		for i in range(2):
+			player_deck.append(random.randint(1,11))
+			opponent_deck.append(random.randint(1,11))
+
+def ResetGame():
+	if input('Would you like to play again?:: [yes] [no]' ) == 'yes':
+		player_deck = []
+		opponent_deck = []
+		StartingCards(player_deck, opponent_deck)
+		game(player_deck, opponent_deck)
+	else:
+		print('Thanks for playing!')
+		exit()
+
+
+def game(player_deck, opponent_deck):
+	print('You have::', player_deck[0], '|', player_deck[1])
+	print('Your opponent has:: X |', opponent_deck[1])
+
+	if sum(player_deck) and sum(opponent_deck) == 21:
+		print('Its a DRAW!')
+		ResetGame()
+		'''if input('Would you like to play again?[yes][no]') == 'yes':
+			ResetGame()
+		else:
+			print('Thanks for playing')
+			exit()'''
+	elif sum(player_deck) == 21:
+		print('You have BlackJack!')
+		ResetGame()
+
+	elif sum(opponent_deck) == 21:
+		print('Your opponent has BlackJack!')
+		ResetGame()
+
+	while sum(player_deck) < 21:
+		user = input('Would you like to [hit] or [stay]?:: ')
+		if user == 'hit':
+			player_deck.append(random.randint(1,11))
+			print('You now have::', sum(player_deck))
+		else:
+			print('The sum of your cards are::', sum(player_deck))
+			print('The sum of your opponents cards are::', sum(opponent_deck))
+			if sum(player_deck) > sum(opponent_deck):
+				print('You Win!')
+				ResetGame()
+			else:
+				print('You Lose!')
+				ResetGame()
+	print('Dang, you busted and went over 21!')
+	ResetGame()
+
+
+
+if __name__ == '__main__':
+	player_deck = []
+	opponent_deck = []
+	StartingCards(player_deck, opponent_deck)
+	game(player_deck, opponent_deck)
+
+
+#Must play this game on Pycharm to get past the input statements of the game!!
+#2nd generation will have animations and such
+
